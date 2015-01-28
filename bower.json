@@ -1,0 +1,15 @@
+{
+  "name": "purescript-monadplus-partial",
+  "description": "Partial maps and filters over MonadPlus instances",
+  "homepage": "https://github.com/anttih/purescript-monadplus-partial",
+  "version": "0.1.0",
+  "keywords": ["purescript", "monadplus"],
+  "license": "MIT",
+  "dependencies": {
+    "purescript-control": "0.2.1",
+    "purescript-foldable-traversable": "0.2.1",
+    "purescript-either": "0.1.4",
+    "purescript-maybe": "0.2.1",
+    "purescript-tuples": "0.2.3"
+  }
+}

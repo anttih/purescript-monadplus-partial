@@ -1,9 +1,10 @@
 module Control.MonadPlus.Partial where
 
+import Prelude
 import Control.Alt
 import Control.MonadPlus
 import Control.Plus
-import Data.Foldable (foldrArray)
+import Data.Foldable (foldr)
 import Data.Either
 import Data.Maybe
 import Data.Tuple
@@ -17,11 +18,11 @@ mreturn f = mfromMaybe <<< f
 mcatMaybes :: forall m a. (MonadPlus m) => m (Maybe a) -> m a
 mcatMaybes m = m >>= mfromMaybe
 
-msum :: forall m a. (MonadPlus m) => [m a] -> m a
-msum = foldrArray (<|>) empty
+msum :: forall m a. (MonadPlus m) => Array (m a) -> m a
+msum = foldr alt empty
 
-mfromList :: forall m a. (MonadPlus m) => [a] -> m a
-mfromList = msum <<< (<$>) return
+mfromList :: forall m a. (MonadPlus m) => Array a -> m a
+mfromList = msum <<< map return
 
 mfilter :: forall m a. (MonadPlus m) => (a -> Boolean) -> m a -> m a
 mfilter f m = do

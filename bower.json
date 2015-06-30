@@ -2,7 +2,7 @@
   "name": "purescript-monadplus-partial",
   "description": "Partial maps and filters over MonadPlus instances",
   "homepage": "https://github.com/anttih/purescript-monadplus-partial",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "keywords": [
     "purescript",
     "monadplus"

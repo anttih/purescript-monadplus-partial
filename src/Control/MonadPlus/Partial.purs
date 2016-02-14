@@ -1,13 +1,13 @@
 module Control.MonadPlus.Partial where
 
-import Prelude
-import Control.Alt
-import Control.MonadPlus
-import Control.Plus
+import Prelude (liftM1, (<<<), not, return, bind, map, (>>=))
+import Control.Alt (alt)
+import Control.MonadPlus (class MonadPlus)
+import Control.Plus (empty)
 import Data.Foldable (foldr)
-import Data.Either
-import Data.Maybe
-import Data.Tuple
+import Data.Either (Either(..))
+import Data.Maybe (Maybe(..), maybe)
+import Data.Tuple (Tuple(Tuple))
 
 mfromMaybe :: forall m a. (MonadPlus m) => Maybe a -> m a
 mfromMaybe = maybe empty return

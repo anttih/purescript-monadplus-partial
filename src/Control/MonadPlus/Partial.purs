@@ -1,6 +1,6 @@
 module Control.MonadPlus.Partial where
 
-import Prelude (liftM1, (<<<), not, return, bind, map, (>>=))
+import Prelude (liftM1, (<<<), not, pure, bind, map, (>>=))
 import Control.Alt (alt)
 import Control.MonadPlus (class MonadPlus)
 import Control.Plus (empty)
@@ -10,7 +10,7 @@ import Data.Maybe (Maybe(..), maybe)
 import Data.Tuple (Tuple(Tuple))
 
 mfromMaybe :: forall m a. (MonadPlus m) => Maybe a -> m a
-mfromMaybe = maybe empty return
+mfromMaybe = maybe empty pure
 
 mreturn :: forall m a b. (MonadPlus m) => (a -> Maybe b) -> a -> m b
 mreturn f = mfromMaybe <<< f
@@ -22,12 +22,12 @@ msum :: forall m a. (MonadPlus m) => Array (m a) -> m a
 msum = foldr alt empty
 
 mfromList :: forall m a. (MonadPlus m) => Array a -> m a
-mfromList = msum <<< map return
+mfromList = msum <<< map pure
 
 mfilter :: forall m a. (MonadPlus m) => (a -> Boolean) -> m a -> m a
 mfilter f m = do
   x <- m
-  if f x then return x else empty
+  if f x then pure x else empty
 
 mpartition :: forall m a. (MonadPlus m) => (a -> Boolean) -> m a -> Tuple (m a) (m a)
 mpartition f m = Tuple (mfilter f m) (mfilter (not <<< f) m)
